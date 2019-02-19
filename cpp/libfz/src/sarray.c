@@ -20,7 +20,7 @@ Software You distribute:
     Copyright (c) 2002.  All rights reserved.
     Contributor(s):___________________________"
 */
-/*	
+/*
 	int sarray(int a[], int n)
 Purpose
 	Return in a[] a suffix array for the original
@@ -29,7 +29,7 @@ Purpose
 	in some list.)
 
 Precondition
-	Array a[] holds n values, with n>=1.  Exactly k 
+	Array a[] holds n values, with n>=1.  Exactly k
 	distinct values, in the range 0..k-1, are present.
 	Value 0, an endmark, appears exactly once, at a[n-1].
 
@@ -73,7 +73,7 @@ sarray(int a[], int n)
 	int *al;
 	int *pl;
 
-	for(k=0,i=0; i<n; i++)	
+	for(k=0,i=0; i<n; i++)
 		if(a[i] > k)
 			k = a[i];	/* max element */
 	k++;
@@ -81,7 +81,7 @@ sarray(int a[], int n)
 		goto out;
 
 	nbuck = 0;
-	p = malloc(n*sizeof(int));
+	p = (int*) malloc(n*sizeof(int));
 	if(p == 0)
 		goto out;
 
@@ -100,11 +100,11 @@ sarray(int a[], int n)
 		if(pl[i]<0)
 			goto out;
 
-	
+
 	lab = 0;			/* (2) create p and label a */
 	cum = 0;
 	i = 0;
-	for(c = 0; c < k; c++){	
+	for(c = 0; c < k; c++){
 		for(cc = pl[c]; cc != -1; cc = ncc){
 			ncc = al[cc];
 			al[cc] = lab;
@@ -122,7 +122,7 @@ sarray(int a[], int n)
 
 	result = ssortit(a, p, n, 1, p+i, nbuck);
 	memcpy(a, p, n*sizeof(int));
-	
+
 out:
 	free(p);
 	return result;
@@ -130,8 +130,8 @@ out:
 
 /* bsarray(uchar buf[], int p[], int n)
  * The input, buf, is an arbitrary byte array of length n.
- * The input is copied to temporary storage, relabeling 
- * pairs of input characters and appending a unique end marker 
+ * The input is copied to temporary storage, relabeling
+ * pairs of input characters and appending a unique end marker
  * having a value that is effectively less than any input byte.
  * The suffix array of this extended input is computed and
  * stored in p, which must have length at least n+1.
@@ -146,7 +146,7 @@ bsarray(const uchar buf[], int p[], int n)
 	int *a, buckets[256*256];
 	int i, last, cum, c, cc, ncc, lab, id, nbuck;
 
-	a = malloc((n+1)*sizeof(int));
+	a = (int*) malloc((n+1)*sizeof(int));
 	if(a == 0)
 		return -1;
 
@@ -292,7 +292,7 @@ med3(int *a, int *b, int *c, int *asucc)
 	if ((va=asucc[*a]) == (vb=asucc[*b]))
 		return a;
 	if ((vc=asucc[*c]) == va || vc == vb)
-		return c;	   
+		return c;
 	return va < vb ?
 		  (vb < vc ? b : (va < vc ? c : a))
 		: (vb > vc ? b : (va < vc ? a : c));

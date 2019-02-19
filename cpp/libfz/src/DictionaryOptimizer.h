@@ -24,6 +24,7 @@
 #define DICTIONARYOPTIMIZER_H_
 
 #include <vector>
+#include <string>
 #include "Substring.h"
 
 using namespace std;

@@ -39,6 +39,7 @@
 extern "C" {
 #endif
 
+#include <stddef.h>
 
 /**
  * Loads a model from the file 'path'.  The model should
